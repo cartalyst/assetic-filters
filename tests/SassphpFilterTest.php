@@ -18,7 +18,6 @@
  * @link       http://cartalyst.com
  */
 
-use Mockery as m;
 use Assetic\Asset\FileAsset;
 use Cartalyst\AsseticFilters\SassphpFilter;
 
@@ -26,27 +25,14 @@ class SassphpFilterTest extends PHPUnit_Framework_TestCase {
 
 	public function testCompilingWithImportPath()
 	{
-		$asset = new FileAsset(__DIR__.'/stubs/sass/main.sass');
+		$asset = new FileAsset(__DIR__.'/stubs/sass/style.sass');
 		$asset->load();
 
 		$filter = new SassphpFilter;
 		$filter->addImportPath(__DIR__.'/stubs/sass/import_path');
 		$filter->filterLoad($asset);
 
-		$expected = <<<EOF
-li {
-  font-family: serif;
-  font-weight: bold;
-  font-size: 1.2em;
-  color: red; }
-
-table.hl {
-  margin: 2em 0; }
-  table.hl td.ln {
-    text-align: right; }
-
-
-EOF;
+		$expected = file_get_contents(__DIR__.'/stubs/sass/style.css');
 
 		$this->assertEquals($expected, $asset->getContent());
 	}

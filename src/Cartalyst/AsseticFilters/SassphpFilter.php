@@ -69,11 +69,34 @@ class SassphpFilter implements FilterInterface {
 
 	}
 
+	/**
+	 * Sets the presets used by the filter.
+	 *
+	 * @param  array  $presets
+	 * @return void
+	 */
+	public function setPreset(array $presets)
+	{
+		$this->presets = $presets;
+	}
+
+	/**
+	 * Sets the import paths used by the filter.
+	 *
+	 * @param  string  $presets
+	 * @return void
+	 */
 	public function setImportPaths(array $paths)
 	{
 		$this->importPaths = $paths;
 	}
 
+	/**
+	 * Appends a new import path.
+	 *
+	 * @param  string  $path
+	 * @return void
+	 */
 	public function addImportPath($path)
 	{
 		$this->importPaths[] = $path;
