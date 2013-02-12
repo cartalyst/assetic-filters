@@ -19,16 +19,16 @@
  */
 
 use Assetic\Asset\FileAsset;
-use Cartalyst\AsseticFilters\CoffeescriptphpFilter;
+use Cartalyst\AsseticFilters\CoffeeScriptphpFilter;
 
-class CoffeescriptphpFilterTest extends PHPUnit_Framework_TestCase {
+class CoffeeScriptphpFilterTest extends PHPUnit_Framework_TestCase {
 
 	public function testCompilation()
 	{
 		$asset = new FileAsset(__DIR__.'/stubs/coffeescript/script.coffee');
 		$asset->load();
 
-		$filter = new CoffeescriptphpFilter;
+		$filter = new CoffeeScriptphpFilter;
 		$filter->filterLoad($asset);
 
 		$expected = file_get_contents(__DIR__.'/stubs/coffeescript/script.js');

@@ -22,7 +22,7 @@ use Assetic\Asset\AssetInterface;
 use Assetic\Filter\FilterInterface;
 use CoffeeScript\Compiler;
 
-class CoffeescriptphpFilter implements FilterInterface {
+class CoffeeScriptphpFilter implements FilterInterface {
 
 	/**
 	 * Sassphp preset options.
