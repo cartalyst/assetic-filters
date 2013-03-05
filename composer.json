@@ -48,8 +48,8 @@
 		}
 	},
 	"extra": {
+		"component": "package",
 		"branch-alias": {
-			"component": "package",
 			"dev-master": "1.0-dev"
 		}
 	},
