@@ -1,0 +1,9 @@
+{
+	"name" : "Assetic Filters",
+	"type" : "package",
+	"public" : false,
+	"branch" : "master",
+	"github" : "cartalyst/assetic-filters",
+	"travis" : false,
+	"demo" : false
+}
