@@ -17,7 +17,7 @@ Installation of our assetic filters is easy. Simply ensure your `composer.json` 
 			}
 		],
 		"require": {
-			"cartalyst/assetic-filters": "2.0.*"
+			"cartalyst/assetic-filters": "1.0.*"
 		}
 	}
 
