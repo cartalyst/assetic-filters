@@ -1,4 +1,4 @@
-<?php
+<?php namespace Cartalyst\AsseticFilters\Tests;
 /**
  * Part of the Assetic Filters Package.
  *
@@ -20,6 +20,7 @@
 
 use Assetic\Asset\FileAsset;
 use Cartalyst\AsseticFilters\CoffeeScriptphpFilter;
+use PHPUnit_Framework_TestCase;
 
 class CoffeeScriptphpFilterTest extends PHPUnit_Framework_TestCase {
 
