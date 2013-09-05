@@ -34,5 +34,4 @@ Follow us on Twitter, [@cartalyst](http://twitter.com/cartalyst).
 Join us for a chat on IRC.
 
 Server: irc.freenode.net
-Channel: #cartalystassetic-filters
-===============
+Channel: #cartalyst
