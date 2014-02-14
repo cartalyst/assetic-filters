@@ -30,6 +30,13 @@ class LessphpFilter extends AsseticLessphpFilter {
 	 */
 	public function filterLoad(AssetInterface $asset)
 	{
+		$max_nesting_level = ini_get('xdebug.max_nesting_level');
+
+		if ($max_nesting_level && $max_nesting_level < 200)
+		{
+			ini_set('xdebug.max_nesting_level', 200);
+		}
+
 		$root = $asset->getSourceRoot();
 		$path = $asset->getSourcePath();
 
