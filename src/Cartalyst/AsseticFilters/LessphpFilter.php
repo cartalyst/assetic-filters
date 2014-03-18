@@ -32,9 +32,16 @@ class LessphpFilter extends AsseticLessphpFilter {
 	{
 		$max_nesting_level = ini_get('xdebug.max_nesting_level');
 
+		$memory_limit = ini_get('memory_limit');
+
 		if ($max_nesting_level && $max_nesting_level < 200)
 		{
 			ini_set('xdebug.max_nesting_level', 200);
+		}
+
+		if ($memory_limit && $memory_limit < 256)
+		{
+			ini_set('memory_limit', '256M');
 		}
 
 		$root = $asset->getSourceRoot();
@@ -43,8 +50,7 @@ class LessphpFilter extends AsseticLessphpFilter {
 		$dirs = array();
 
 		$lc = new \Less_Parser(array(
-			'compress' => true,
-			'relativeUrls' => false,
+			'compress'     => true,
 		));
 
 		if ($root && $path)
@@ -59,7 +65,16 @@ class LessphpFilter extends AsseticLessphpFilter {
 
 		$lc->SetImportDirs($dirs);
 
-		$lc->parseFile($root.'/'.$path, $root);
+		$url = parse_url(url());
+
+		$absolutePath = str_replace(public_path(), '', $root);
+
+		if (isset($url['path']))
+		{
+			$absolutePath = $url['path'] . $absolutePath;
+		}
+
+		$lc->parseFile($root.'/'.$path, $absolutePath);
 
 		$asset->setContent($lc->getCss());
 	}
