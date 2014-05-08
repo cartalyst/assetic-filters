@@ -1,8 +1,8 @@
 #Assetic Filters
 
-Additional assetic filters (PHP SASS compiler) to enhance Assetic. 
+Additional assetic filters (PHP SASS compiler) to enhance Assetic.
 
-Part of the Cartalyst Arsenal & licensed [OSI BSD 3](license.txt). Code well, rock on.
+Part of the Cartalyst Arsenal & licensed [Cartalyst PSL](license.txt). Code well, rock on.
 
 ##Package Story
 

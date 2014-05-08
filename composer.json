@@ -2,7 +2,7 @@
 	"name": "cartalyst/assetic-filters",
 	"description": "Additional assetic filters (such as a PHP SASS compiler) to enhance Assetic.",
 	"keywords": ["assetic", "filters", "assets", "themes"],
-	"license": "BSD-3-Clause",
+	"license": "Cartalyst-PSL",
 	"authors": [
 		{
 			"name": "Cartalyst LLC",
