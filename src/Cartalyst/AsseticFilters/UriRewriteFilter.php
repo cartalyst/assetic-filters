@@ -74,6 +74,7 @@ class UriRewriteFilter implements FilterInterface {
 	public function __construct($documentRoot = null, $symlinks = array())
 	{
 		$this->documentRoot = $this->realPath($documentRoot ?: $_SERVER['DOCUMENT_ROOT']);
+		$this->baseLength = $this->determineBaseLength($documentRoot);
 		$this->symlinks = $symlinks;
 	}
 
@@ -225,7 +226,7 @@ class UriRewriteFilter implements FilterInterface {
 		}
 
 		// Strip the document root from the path.
-		$path = substr($path, strlen($this->documentRoot));
+		$path = rtrim(dirname($_SERVER['PHP_SELF']), DIRECTORY_SEPARATOR).substr($path, $this->baseLength);
 
 		$uri = strtr($path, '/\\', '//');
 		$uri = $this->removeDots($uri);
@@ -250,6 +251,35 @@ class UriRewriteFilter implements FilterInterface {
 		while ($changed);
 
 		return $uri;
+	}
+
+	/**
+	 * Determines the base path length.
+	 *
+	 * @param  string  $documentRoot
+	 * @return int
+	 */
+	protected function determineBaseLength($documentRoot)
+	{
+		if ( ! $documentRoot)
+		{
+			$documentRoot = $_SERVER['DOCUMENT_ROOT'];
+		}
+
+		$phpSelf = dirname($_SERVER['PHP_SELF']);
+
+		$actualPath = $documentRoot.$phpSelf;
+
+		if (is_link($actualPath))
+		{
+			$path = str_replace($phpSelf, null, $this->realPath($actualPath));
+		}
+		else
+		{
+			$path = $this->realPath($documentRoot);
+		}
+
+		return strlen($path);
 	}
 
 }
