@@ -20,38 +20,71 @@
 use Assetic\Asset\StringAsset;
 use Cartalyst\AsseticFilters\UriRewriteFilter;
 use PHPUnit_Framework_TestCase;
+use Mockery as m;
 
 class UriRewriteFilterTest extends PHPUnit_Framework_TestCase {
 
+	/**
+	 * Close mockery.
+	 *
+	 * @return void
+	 */
+	public function tearDown()
+	{
+		m::close();
+	}
 
-    public function testUriRewrite()
-    {
-        $filter = new UriRewriteFilter('path/to/public');
+	public function testUriRewrite()
+	{
+		$request = m::mock('Symfony\Component\HttpFoundation\Request');
+		$request->shouldReceive('getBaseUrl')->once();
 
-        $input = "body { background-image: url('../foo/bar.png'); }";
+		$filter = new UriRewriteFilter('path/to/public', array(), $request);
 
-        $asset = new StringAsset($input, array(), 'path/to/public/baz', 'qux.css');
-        $asset->load();
+		$input = "body { background-image: url('../foo/bar.png'); }";
 
-        $filter->filterDump($asset);
+		$asset = new StringAsset($input, array(), 'path/to/public/baz', 'qux.css');
+		$asset->load();
 
-        $this->assertEquals("body { background-image: url('/foo/bar.png'); }", $asset->getContent());
-    }
+		$filter->filterDump($asset);
 
-
-    public function testUriRewriteWithSymlinks()
-    {
-        $filter = new UriRewriteFilter('path/to/public', array('//assets' => strtr('path/to/outside/public/assets', '/', DIRECTORY_SEPARATOR)));
-        $input = "body { background-image: url('../foo/bar.png'); }";
+		$this->assertEquals("body { background-image: url('/foo/bar.png'); }", $asset->getContent());
+	}
 
 
-        $asset = new StringAsset($input, array(), 'path/to/outside/public/assets/baz', 'qux.css');
-        $asset->load();
+	public function testUriRewriteWithSymlinks()
+	{
+		$request = m::mock('Symfony\Component\HttpFoundation\Request');
+		$request->shouldReceive('getBaseUrl')->once();
 
-        $filter->filterDump($asset);
+		$filter = new UriRewriteFilter('path/to/public', array('//assets' => strtr('path/to/outside/public/assets', '/', DIRECTORY_SEPARATOR)), $request);
 
-        $this->assertEquals("body { background-image: url('/assets/foo/bar.png'); }", $asset->getContent());
-    }
+		$input = "body { background-image: url('../foo/bar.png'); }";
+
+		$asset = new StringAsset($input, array(), 'path/to/outside/public/assets/baz', 'qux.css');
+		$asset->load();
+
+		$filter->filterDump($asset);
+
+		$this->assertEquals("body { background-image: url('/assets/foo/bar.png'); }", $asset->getContent());
+	}
+
+	public function testUriRewriteWithSymlinksAndSubDir()
+	{
+		$request = m::mock('Symfony\Component\HttpFoundation\Request');
+		$request->shouldReceive('getBaseUrl')->once()->andReturn('/test');
+
+		$filter = new UriRewriteFilter('path/to/public', array('//assets' => strtr('path/to/outside/public/assets', '/', DIRECTORY_SEPARATOR)), $request);
+
+		$input = "body { background-image: url('../foo/bar.png'); }";
+
+		$asset = new StringAsset($input, array(), 'path/to/outside/public/assets/baz', 'qux.css');
+		$asset->load();
+
+		$filter->filterDump($asset);
+
+		$this->assertEquals("body { background-image: url('/test/assets/foo/bar.png'); }", $asset->getContent());
+	}
 
 
 }

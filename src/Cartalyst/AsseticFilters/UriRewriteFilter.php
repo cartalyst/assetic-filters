@@ -19,6 +19,7 @@
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Filter\FilterInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Credit for this filter goes to Jason Lewis, with his no longer maintained Basset package.
@@ -50,6 +51,13 @@ class UriRewriteFilter implements FilterInterface {
 	protected $documentRoot;
 
 	/**
+	 * Applications base url.
+	 *
+	 * @var string
+	 */
+	protected $baseUrl;
+
+	/**
 	 * Root directory of the asset.
 	 *
 	 * @var string
@@ -70,9 +78,12 @@ class UriRewriteFilter implements FilterInterface {
 	 * @param  array  $symlinks
 	 * @return void
 	 */
-	public function __construct($documentRoot = null, $symlinks = array())
+	public function __construct($documentRoot = null, $symlinks = array(), $request = null)
 	{
-		$this->documentRoot = $this->realPath($documentRoot ?: $_SERVER['DOCUMENT_ROOT']);
+		$request = $request ?: Request::createFromGlobals();
+
+		$this->baseUrl = $request->getBaseUrl();
+		$this->documentRoot = $this->realPath($documentRoot) ?: $_SERVER['DOCUMENT_ROOT'];
 		$this->symlinks = $symlinks;
 	}
 
@@ -224,7 +235,7 @@ class UriRewriteFilter implements FilterInterface {
 		}
 
 		// Strip the document root from the path.
-		$path = substr($path, strlen($this->documentRoot));
+		$path = $this->baseUrl . substr($path, strlen($this->documentRoot));
 
 		$uri = strtr($path, '/\\', '//');
 		$uri = $this->removeDots($uri);
