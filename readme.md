@@ -1,5 +1,7 @@
 #Assetic Filters
 
+[![Build Status](http://ci.cartalyst.com/build-status/svg/23)](http://ci.cartalyst.com/build-status/view/23)
+
 Additional assetic filters (PHP SASS compiler) to enhance Assetic.
 
 Part of the Cartalyst Arsenal & licensed [Cartalyst PSL](license.txt). Code well, rock on.
