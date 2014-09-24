@@ -51,11 +51,11 @@ class UriRewriteFilter implements FilterInterface {
 	protected $documentRoot;
 
 	/**
-	 * Applications base url.
+	 * Symfony request instance.
 	 *
 	 * @var string
 	 */
-	protected $baseUrl;
+	protected $request;
 
 	/**
 	 * Root directory of the asset.
@@ -78,11 +78,8 @@ class UriRewriteFilter implements FilterInterface {
 	 * @param  array  $symlinks
 	 * @return void
 	 */
-	public function __construct($documentRoot = null, $symlinks = array(), $request = null)
+	public function __construct($documentRoot = null, $symlinks = array())
 	{
-		$request = $request ?: Request::createFromGlobals();
-
-		$this->baseUrl = $request->getBaseUrl();
 		$this->documentRoot = $this->realPath($documentRoot) ?: $_SERVER['DOCUMENT_ROOT'];
 		$this->symlinks = $symlinks;
 	}
@@ -172,6 +169,8 @@ class UriRewriteFilter implements FilterInterface {
 	 */
 	protected function processUriCallback($matches)
 	{
+		$scriptName = basename($this->getRequest()->getScriptName());
+
 		$isImport = $matches[0][0] === '@';
 
 		// Determine what the quote character and the URI is, if there is one.
@@ -200,6 +199,9 @@ class UriRewriteFilter implements FilterInterface {
 			}
 		}
 
+		// Strip off the scriptname
+		$uri = str_replace($scriptName.'/', '', $uri);
+
 		// Analyze the URI
 		if ($uri[0] !== '/' and strpos($uri, '//') === false and strpos($uri, 'data') !== 0)
 		{
@@ -222,6 +224,8 @@ class UriRewriteFilter implements FilterInterface {
 	 */
 	protected function rewriteRelative($uri)
 	{
+		$request = $this->getRequest();
+
 		$path = strtr($this->assetDirectory, '/', DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.strtr($uri, '/', DIRECTORY_SEPARATOR);
 
 		foreach ($this->symlinks as $link => $target)
@@ -234,8 +238,13 @@ class UriRewriteFilter implements FilterInterface {
 			}
 		}
 
-		// Strip the document root from the path.
-		$path = $this->baseUrl . substr($path, strlen($this->documentRoot));
+		// Prepend the base url to compile the correct paths
+		// for subdirectories and symlinked directories
+		$path = $request->getBaseUrl() . substr($path, strlen($this->documentRoot));
+		$scriptName = basename($request->getScriptName());
+
+		// Strip off the scriptname (index.php) if present
+		$path = str_replace($scriptName.'/', '', $path);
 
 		$uri = strtr($path, '/\\', '//');
 		$uri = $this->removeDots($uri);
@@ -260,6 +269,27 @@ class UriRewriteFilter implements FilterInterface {
 		while ($changed);
 
 		return $uri;
+	}
+
+	/**
+	 * Returns or creates a new symfony request.
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Request
+	 */
+	public function getRequest()
+	{
+		return $this->request ?: $this->request = Request::createFromGlobals();
+	}
+
+	/**
+	 * Sets the request instance.
+	 *
+	 * @param  \Symfony\Component\HttpFoundation\Request
+	 * @return void
+	 */
+	public function setRequest($request)
+	{
+		$this->request = $request;
 	}
 
 }
