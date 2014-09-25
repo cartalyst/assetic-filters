@@ -18,9 +18,17 @@
  */
 
 use Assetic\Asset\AssetInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Assetic\Filter\LessphpFilter as AsseticLessphpFilter;
 
 class LessphpFilter extends AsseticLessphpFilter {
+
+	/**
+	 * Symfony request instance.
+	 *
+	 * @var string
+	 */
+	protected $request;
 
 	/**
 	 * Filters an asset after it has been loaded.
@@ -64,7 +72,7 @@ class LessphpFilter extends AsseticLessphpFilter {
 
 		$lc->SetImportDirs($dirs);
 
-		$url = parse_url(url());
+		$url = parse_url($this->getRequest()->getUriForPath(''));
 
 		$absolutePath = str_replace(public_path(), '', $root);
 
@@ -77,4 +85,26 @@ class LessphpFilter extends AsseticLessphpFilter {
 
 		$asset->setContent($lc->getCss());
 	}
+
+	/**
+	 * Returns or creates a new symfony request.
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Request
+	 */
+	public function getRequest()
+	{
+		return $this->request ?: $this->request = Request::createFromGlobals();
+	}
+
+	/**
+	 * Sets the request instance.
+	 *
+	 * @param  \Symfony\Component\HttpFoundation\Request
+	 * @return void
+	 */
+	public function setRequest($request)
+	{
+		$this->request = $request;
+	}
+
 }
