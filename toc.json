@@ -1,6 +1,7 @@
 {
 	"introduction" : [
-		"index"
+		"index",
+		"installation"
 	],
 	"usage": [
 		"index"
