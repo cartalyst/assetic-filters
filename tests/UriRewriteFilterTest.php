@@ -48,7 +48,6 @@ class UriRewriteFilterTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("body { background-image: url('/foo/bar.png'); }", $asset->getContent());
 	}
 
-
 	public function testUriRewriteWithSymlinks()
 	{
 		$filter = new UriRewriteFilter('path/to/public', array('//assets' => strtr('path/to/outside/public/assets', '/', DIRECTORY_SEPARATOR)));
@@ -81,6 +80,22 @@ class UriRewriteFilterTest extends PHPUnit_Framework_TestCase {
 		$filter->filterDump($asset);
 
 		$this->assertEquals("body { background-image: url('/test/assets/foo/bar.png'); }", $asset->getContent());
+	}
+
+	public function testOverrideDocRoot()
+	{
+		$_SERVER['DOCUMENT_ROOT'] = 'foo';
+
+		$filter = new UriRewriteFilter();
+
+		$input = "body { background-image: url('../foo/bar.png'); }";
+
+		$asset = new StringAsset($input, array(), 'foo/baz', 'qux.css');
+		$asset->load();
+
+		$filter->filterDump($asset);
+
+		$this->assertEquals("body { background-image: url('/foo/bar.png'); }", $asset->getContent());
 	}
 
 }
