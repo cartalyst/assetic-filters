@@ -10,10 +10,10 @@
  * bundled with this package in the license.txt file.
  *
  * @package    Assetic Filters
- * @version    1.2.2
+ * @version    1.2.3
  * @author     Cartalyst LLC
  * @license    Cartalyst PSL
- * @copyright  (c) 2011-2014, Cartalyst LLC
+ * @copyright  (c) 2011-2015, Cartalyst LLC
  * @link       http://cartalyst.com
  */
 

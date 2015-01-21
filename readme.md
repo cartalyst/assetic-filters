@@ -6,7 +6,7 @@ Additional assetic filters (PHP SASS compiler) to enhance Assetic.
 
 Part of the Cartalyst Arsenal & licensed [Cartalyst PSL](license.txt). Code well, rock on.
 
-##Package Story
+## Package Story
 
 History and future capabilities.
 
