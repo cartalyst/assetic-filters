@@ -1,4 +1,4 @@
-#Assetic Filters
+# Assetic Filters
 
 [![Build Status](http://ci.cartalyst.com/build-status/svg/23)](http://ci.cartalyst.com/build-status/view/23)
 

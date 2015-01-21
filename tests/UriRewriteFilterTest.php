@@ -36,6 +36,8 @@ class UriRewriteFilterTest extends PHPUnit_Framework_TestCase {
 
 	public function testUriRewrite()
 	{
+		$_SERVER['REQUEST_URI'] = 'http://example.com';
+
 		$filter = new UriRewriteFilter('path/to/public', array());
 
 		$input = "body { background-image: url('../foo/bar.png'); }";
@@ -45,7 +47,7 @@ class UriRewriteFilterTest extends PHPUnit_Framework_TestCase {
 
 		$filter->filterDump($asset);
 
-		$this->assertEquals("body { background-image: url('/foo/bar.png'); }", $asset->getContent());
+		$this->assertEquals("body { background-image: url('http://example.com/foo/bar.png'); }", $asset->getContent());
 	}
 
 
@@ -60,14 +62,14 @@ class UriRewriteFilterTest extends PHPUnit_Framework_TestCase {
 
 		$filter->filterDump($asset);
 
-		$this->assertEquals("body { background-image: url('/assets/foo/bar.png'); }", $asset->getContent());
+		$this->assertEquals("body { background-image: url('http://example.com/assets/foo/bar.png'); }", $asset->getContent());
 	}
 
 	public function testUriRewriteWithSymlinksAndSubDir()
 	{
 		$request = m::mock('Symfony\Component\HttpFoundation\Request');
-		$request->shouldReceive('getBaseUrl')->once()->andReturn('/test');
 		$request->shouldReceive('getScriptName')->twice()->andReturn('/index.php');
+		$request->shouldReceive('getHost')->once();
 
 		$filter = new UriRewriteFilter('path/to/public', array('//assets' => strtr('path/to/outside/public/assets', '/', DIRECTORY_SEPARATOR)));
 
@@ -80,7 +82,7 @@ class UriRewriteFilterTest extends PHPUnit_Framework_TestCase {
 
 		$filter->filterDump($asset);
 
-		$this->assertEquals("body { background-image: url('/test/assets/foo/bar.png'); }", $asset->getContent());
+		$this->assertEquals("body { background-image: url('http://example.com/assets/foo/bar.png'); }", $asset->getContent());
 	}
 
 }
