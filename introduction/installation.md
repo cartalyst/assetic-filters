@@ -1,6 +1,6 @@
 ## Installation
 
-The best and easiest way to install the Cart package is with [Composer](http://getcomposer.org).
+The best and easiest way to install the assetic filters package is with [Composer](http://getcomposer.org).
 
 ### Preparation
 
