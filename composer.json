@@ -47,7 +47,7 @@
 		"symfony/http-foundation": "~2.5",
 		"kriswallsmith/assetic": "~1",
 		"coffeescript/coffeescript": "~1",
-		"richthegeek/phpsass": "2014-03-20"
+		"richthegeek/phpsass": "~1"
 	},
 	"require-dev": {
 		"mockery/mockery": "~0.9",
