@@ -264,7 +264,7 @@ class UriRewriteFilter implements FilterInterface {
 			}
 		}
 
-		$base = $_SERVER['REQUEST_URI'];
+		$base = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null;
 
 		if ($request->getHost())
 		{
