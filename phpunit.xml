@@ -7,14 +7,19 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
-         stopOnFailure="true"
+         stopOnFailure="false"
          syntaxCheck="false"
 >
     <testsuites>
-        <testsuite name="Assetic Filters Test Suite">
-            <directory>./tests/</directory>
+        <testsuite name="Assetic Filters Package Test Suite">
+            <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/</directory>
+        </whitelist>
+    </filter>
     <logging>
         <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
     </logging>
