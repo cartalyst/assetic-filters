@@ -11,6 +11,12 @@ We do not give estimated times for completion on `Accepted` Proposals.
 
 ---
 
+#### v1.2.7 - 2015-11-12
+
+`UPDATED`
+
+- Bumped Assetic version.
+
 #### v1.2.6 - 2015-03-18
 
 `UPDATED`
