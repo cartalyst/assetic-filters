@@ -11,6 +11,12 @@ We do not give estimated times for completion on `Accepted` Proposals.
 
 ---
 
+#### v1.2.8 - 2016-12-06
+
+`UPDATED`
+
+- Loosened symfony/http-foundation version.
+
 #### v1.2.7 - 2015-11-12
 
 `UPDATED`
