@@ -59,7 +59,7 @@ class LessphpFilter extends AsseticLessphpFilter
         $dirs = array();
 
         $lc = new \Less_Parser(array(
-            'compress'     => true,
+            'compress' => true,
         ));
 
         if ($root && $path) {
@@ -74,7 +74,12 @@ class LessphpFilter extends AsseticLessphpFilter
 
         $url = parse_url($this->getRequest()->getUriForPath(''));
 
-        $absolutePath = str_replace(public_path(), '', $root);
+        // Strip the document root from the path.
+        if (strpos($root, app('path.public')) !== false) {
+            $absolutePath = str_replace(app('path.public'), '', $root);
+        } elseif (strpos($root, app('path.resources')) !== false) {
+            $absolutePath = str_replace(app('path.resources'), '', $root);
+        }
 
         if (isset($url['path'])) {
             $absolutePath = $url['path'] . $absolutePath;

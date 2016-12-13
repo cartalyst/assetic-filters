@@ -258,14 +258,12 @@ class UriRewriteFilter implements FilterInterface
             $base = $request->getSchemeAndHttpHost().$request->getBaseUrl();
         }
 
-        // Prepend the base url to compile the correct paths
-        // for subdirectories and symlinked directories
-        $path = $base . substr($path, strlen($this->documentRoot));
-
-        $scriptName = basename($request->getScriptName());
-
-        // Strip off the scriptname (index.php) if present
-        $path = str_replace($scriptName.'/', '', $path);
+        // Strip the document root from the path.
+        if (strpos($path, app('path.public')) !== false) {
+            $path = str_replace(app('path.public'), '', $path);
+        } elseif (strpos($path, app('path.resources')) !== false) {
+            $path = str_replace(app('path.resources'), '', $path);
+        }
 
         $uri = strtr($path, '/\\', '//');
         $uri = $this->removeDots($uri);
