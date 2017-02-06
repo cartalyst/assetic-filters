@@ -4,6 +4,5 @@ Our assetic filters are a (growing) list of filters which enhance Assetic and ca
 
 We currently have the following filters:
 
-1. [CoffeeScript PHP Compiler](#coffeescript-php-compiler)
-2. [SASS PHP Compiler](#sass-php-compiler)
+1. [SASS PHP Compiler](#sass-php-compiler)
 2. [LESS PHP Compiler](#less-php-compiler)
