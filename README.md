@@ -1,5 +1,7 @@
 # Assetic Filters
 
+[![Build Status](https://travis-ci.org/cartalyst/assetic-filters.svg?branch=2.0)](https://travis-ci.org/cartalyst/assetic-filters)
+
 Additional assetic filters (PHP SASS compiler) to enhance Assetic.
 
 The package requires PHP 5.3+ and follows the FIG standard PSR-4 to ensure a high level of interoperability between shared PHP code and is unit-tested.
@@ -12,6 +14,7 @@ Reader-friendly Documentation can be found here. [Assetic Filters Manual](https:
 
 Raw files can be found via this projects docs/version branch.
 
+- [2.0](https://github.com/cartalyst/assetic-filters/tree/docs/2.0)
 - [1.2](https://github.com/cartalyst/assetic-filters/tree/docs/1.2)
 - [1.1](https://github.com/cartalyst/assetic-filters/tree/docs/1.1)
 - [1.0](https://github.com/cartalyst/assetic-filters/tree/docs/1.0)
@@ -20,6 +23,7 @@ Raw files can be found via this projects docs/version branch.
 
 Important versions listed below. Refer to the [Changelog](CHANGELOG.md) for a full history of the project.
 
+- [2.0](CHANGELOG.md) - 2017-02-06
 - [1.2](CHANGELOG.md) - 2014-02-04
 - [1.1](CHANGELOG.md) - 2013-11-27
 - [1.0](CHANGELOG.md) - 2013-04-26
@@ -43,4 +47,4 @@ Bug reports, feature requests, and pull requests can be submitted by following o
 
 This software is released under the [BSD 3-Clause](LICENSE) License.
 
-© 2011-2015 Cartalyst LLC, All rights reserved.
+© 2011-2017 Cartalyst LLC, All rights reserved.

@@ -11,6 +11,16 @@ We do not give estimated times for completion on `Accepted` Proposals.
 
 ---
 
+#### v2.0.0 - 2017-02-06
+
+`UPDATED`
+
+- URI Rewrite Filter for Platform 6+.
+
+`REMOVED`
+
+- Coffee Script Filter.
+
 #### v1.2.8 - 2016-12-06
 
 `UPDATED`
