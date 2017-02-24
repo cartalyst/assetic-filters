@@ -11,6 +11,12 @@ We do not give estimated times for completion on `Accepted` Proposals.
 
 ---
 
+#### v2.0.1 - 2017-02-24
+
+`UPDATED`
+
+- Use dev version of `richthegeek/phpsass`
+
 #### v2.0.0 - 2017-02-06
 
 `UPDATED`
