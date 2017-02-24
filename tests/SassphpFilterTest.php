@@ -11,7 +11,7 @@
  * bundled with this package in the LICENSE file.
  *
  * @package    Assetic Filters
- * @version    2.0.0
+ * @version    2.0.1
  * @author     Cartalyst LLC
  * @license    BSD License (3-clause)
  * @copyright  (c) 2011-2017, Cartalyst LLC
@@ -28,15 +28,15 @@ class SassphpFilterTest extends PHPUnit_Framework_TestCase
 {
     public function testCompilingWithImportPath()
     {
-        // $asset = new FileAsset(__DIR__.'/stubs/sass/style.sass');
-        // $asset->load();
+        $asset = new FileAsset(__DIR__.'/stubs/sass/style.sass');
+        $asset->load();
 
-        // $filter = new SassphpFilter;
-        // $filter->addImportPath(__DIR__.'/stubs/sass/import_path');
-        // $filter->filterLoad($asset);
+        $filter = new SassphpFilter;
+        $filter->addImportPath(__DIR__.'/stubs/sass/import_path');
+        $filter->filterLoad($asset);
 
-        // $expected = file_get_contents(__DIR__.'/stubs/sass/style.css');
+        $expected = file_get_contents(__DIR__.'/stubs/sass/style.css');
 
-        // $this->assertEquals($expected, $asset->getContent());
+        $this->assertEquals($expected, $asset->getContent());
     }
 }
