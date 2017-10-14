@@ -202,7 +202,7 @@ class UriRewriteFilter implements FilterInterface
         $quoteCharacter = $uri = null;
 
         if ($isImport) {
-            $quoteCharater = $matches[1];
+            $quoteCharacter = $matches[1];
 
             $uri = $matches[2];
         } else {
