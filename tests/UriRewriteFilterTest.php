@@ -28,6 +28,19 @@ use Cartalyst\AsseticFilters\UriRewriteFilter;
 
 class UriRewriteFilterTest extends TestCase
 {
+    public function testUriRewriteWithImport() 
+    {
+        $filter = new UriRewriteFilter('path/to/public', array());
+        $input = "@import 'foobar.css';";
+
+        $asset = new StringAsset($input, array(), 'http://example.com/baz', 'qux.css');
+        $asset->load();
+
+        $filter->filterDump($asset);
+
+        $this->assertEquals('@import \'http://example.com/baz/foobar.css\';', $asset->getContent());
+    }
+
     public function testUriRewrite()
     {
         $filter = new UriRewriteFilter('path/to/public', array());
