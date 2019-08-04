@@ -18,7 +18,10 @@
         }
     ],
     "repositories": [
-        { "type": "composer", "url": "https://packages.cartalyst.com" }
+        {
+            "type": "composer",
+            "url": "https://packages.cartalyst.com"
+        }
     ],
     "require": {
         "php": ">=5.6.4",
@@ -36,11 +39,22 @@
             "Cartalyst\\AsseticFilters\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Cartalyst\\AsseticFilters\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
     "extra": {
         "component": "package",
         "branch-alias": {
             "dev-master": "2.0.x-dev"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
