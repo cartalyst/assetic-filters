@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Part of the Assetic Filters package.
  *
  * NOTICE OF LICENSE
@@ -21,22 +21,22 @@
 namespace Cartalyst\AsseticFilters\Tests;
 
 use Assetic\Asset\FileAsset;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Cartalyst\AsseticFilters\SassphpFilter;
 
-class SassphpFilterTest extends PHPUnit_Framework_TestCase
+class SassphpFilterTest extends TestCase
 {
     public function testCompilingWithImportPath()
     {
         $asset = new FileAsset(__DIR__.'/stubs/sass/style.sass');
         $asset->load();
 
-        $filter = new SassphpFilter;
+        $filter = new SassphpFilter();
         $filter->addImportPath(__DIR__.'/stubs/sass/import_path');
         $filter->filterLoad($asset);
 
         $expected = file_get_contents(__DIR__.'/stubs/sass/style.css');
 
-        $this->assertEquals($expected, $asset->getContent());
+        $this->assertSame($expected, $asset->getContent());
     }
 }
