@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Part of the Assetic Filters package.
  *
  * NOTICE OF LICENSE
@@ -30,22 +30,23 @@ class SassphpFilter implements FilterInterface
      *
      * @var array
      */
-    protected $presets = array();
+    protected $presets = [];
 
     /**
      * Sassphp import paths.
      *
      * @var array
      */
-    protected $importPaths = array();
+    protected $importPaths = [];
 
     /**
      * Filters an asset after it has been loaded.
      *
-     * @param  \Assetic\Asset\AssetInterface  $asset
+     * @param \Assetic\Asset\AssetInterface $asset
+     *
      * @return void
      */
-    public function filterLoad(AssetInterface $asset)
+    public function filterLoad(AssetInterface $asset): void
     {
         $root = $asset->getSourceRoot();
         $path = $asset->getSourcePath();
@@ -53,7 +54,7 @@ class SassphpFilter implements FilterInterface
         $compiler = new \SassParser($this->presets);
 
         if ($root and $path) {
-            $compiler->load_paths = array_merge($compiler->load_paths, array($root.'/'.$path));
+            $compiler->load_paths = array_merge($compiler->load_paths, [$root.'/'.$path]);
         }
 
         $compiler->load_paths = array_merge($compiler->load_paths, $this->importPaths);
@@ -64,20 +65,22 @@ class SassphpFilter implements FilterInterface
     /**
      * Filters an asset just before it's dumped.
      *
-     * @param  \Assetic\Asset\AssetInterface  $asset
+     * @param \Assetic\Asset\AssetInterface $asset
+     *
      * @return void
      */
-    public function filterDump(AssetInterface $asset)
+    public function filterDump(AssetInterface $asset): void
     {
     }
 
     /**
      * Sets the presets used by the filter.
      *
-     * @param  array  $presets
+     * @param array $presets
+     *
      * @return void
      */
-    public function setPreset(array $presets)
+    public function setPreset(array $presets): void
     {
         $this->presets = $presets;
     }
@@ -85,10 +88,11 @@ class SassphpFilter implements FilterInterface
     /**
      * Sets the import paths used by the filter.
      *
-     * @param  string  $presets
+     * @param array $paths
+     *
      * @return void
      */
-    public function setImportPaths(array $paths)
+    public function setImportPaths(array $paths): void
     {
         $this->importPaths = $paths;
     }
@@ -96,10 +100,11 @@ class SassphpFilter implements FilterInterface
     /**
      * Appends a new import path.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return void
      */
-    public function addImportPath($path)
+    public function addImportPath(string $path): void
     {
         $this->importPaths[] = $path;
     }

@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Part of the Assetic Filters package.
  *
  * NOTICE OF LICENSE
@@ -24,7 +24,7 @@ use Assetic\Asset\AssetInterface;
 use Assetic\Filter\FilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
+/*
  * Credit for this filter goes to Jason Lewis, with his no longer maintained Basset package.
  *
  * @author    Jason Lewis
@@ -34,7 +34,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @copyright 2012-2013 Jason Lewis
  */
 
-/**
+/*
  * UriRewriteFilter is a rewrite and port of the popular CssUriRewrite class written by Steve Clay.
  * Original source can be found by following the links below.
  *
@@ -54,9 +54,9 @@ class UriRewriteFilter implements FilterInterface
     protected $documentRoot;
 
     /**
-     * Symfony request instance.
+     * The Symfony Request instance.
      *
-     * @var string
+     * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
 
@@ -75,35 +75,39 @@ class UriRewriteFilter implements FilterInterface
     protected $symlinks;
 
     /**
-     * Create a new UriRewriteFilter instance.
+     * Constructor.
      *
-     * @param  string  $documentRoot
-     * @param  array  $symlinks
+     * @param string $documentRoot
+     * @param array  $symlinks
+     *
      * @return void
      */
-    public function __construct($documentRoot = null, $symlinks = array())
+    public function __construct(string $documentRoot = null, array $symlinks = [])
     {
         $this->documentRoot = $this->realPath($documentRoot);
+
         $this->symlinks = $symlinks;
     }
 
     /**
      * Apply filter on file load.
      *
-     * @param  \Assetic\Asset\AssetInterface  $asset
+     * @param \Assetic\Asset\AssetInterface $asset
+     *
      * @return void
      */
-    public function filterLoad(AssetInterface $asset)
+    public function filterLoad(AssetInterface $asset): void
     {
     }
 
     /**
      * Apply a filter on file dump.
      *
-     * @param  \Assetic\Asset\AssetInterface  $asset
+     * @param \Assetic\Asset\AssetInterface $asset
+     *
      * @return void
      */
-    public function filterDump(AssetInterface $asset)
+    public function filterDump(AssetInterface $asset): void
     {
         $this->assetDirectory = $this->realPath($asset->getSourceRoot());
 
@@ -128,9 +132,9 @@ class UriRewriteFilter implements FilterInterface
 
         $content = $this->trimUrls($content);
 
-        $content = preg_replace_callback('/@import\\s+([\'"])(.*?)[\'"]/', array($this, 'processUriCallback'), $content);
+        $content = preg_replace_callback('/@import\\s+([\'"])(.*?)[\'"]/', [$this, 'processUriCallback'], $content);
 
-        $content = preg_replace_callback('/url\\(\\s*([^\\)\\s]+)\\s*\\)/', array($this, 'processUriCallback'), $content);
+        $content = preg_replace_callback('/url\\(\\s*([^\\)\\s]+)\\s*\\)/', [$this, 'processUriCallback'], $content);
 
         $asset->setContent($content);
     }
@@ -140,18 +144,23 @@ class UriRewriteFilter implements FilterInterface
      *
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    public function getRequest()
+    public function getRequest(): Request
     {
-        return $this->request ?: $this->request = Request::createFromGlobals();
+        if (! $this->request) {
+            $this->request = Request::createFromGlobals();
+        }
+
+        return $this->request;
     }
 
     /**
      * Sets the request instance.
      *
-     * @param  \Symfony\Component\HttpFoundation\Request
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
      * @return void
      */
-    public function setRequest($request)
+    public function setRequest(Request $request): void
     {
         $this->request = $request;
     }
@@ -159,10 +168,11 @@ class UriRewriteFilter implements FilterInterface
     /**
      * Takes a path and transforms it to a real path.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return string
      */
-    protected function realPath($path)
+    protected function realPath(string $path): string
     {
         if (php_sapi_name() == 'cli' && ! $path) {
             $path = $_SERVER['DOCUMENT_ROOT'];
@@ -178,10 +188,11 @@ class UriRewriteFilter implements FilterInterface
     /**
      * Trims URLs.
      *
-     * @param  string  $content
+     * @param string $content
+     *
      * @return string
      */
-    protected function trimUrls($content)
+    protected function trimUrls(string $content): string
     {
         return preg_replace('/url\\(\\s*([^\\)]+?)\\s*\\)/x', 'url($1)', $content);
     }
@@ -189,10 +200,11 @@ class UriRewriteFilter implements FilterInterface
     /**
      * Processes a regular expression callback, determines the URI and returns the rewritten URIs.
      *
-     * @param  array  $matches
+     * @param array $matches
+     *
      * @return string
      */
-    protected function processUriCallback($matches)
+    protected function processUriCallback(array $matches): string
     {
         $scriptName = basename($this->getRequest()->getScriptName());
 
@@ -210,7 +222,7 @@ class UriRewriteFilter implements FilterInterface
                 $quoteCharacter = $matches[1][0];
             }
 
-            if ( ! $quoteCharacter) {
+            if (! $quoteCharacter) {
                 $uri = $matches[1];
             } else {
                 $uri = substr($matches[1], 1, strlen($matches[1]) - 2);
@@ -235,10 +247,11 @@ class UriRewriteFilter implements FilterInterface
     /**
      * Rewrites a relative URI.
      *
-     * @param  string  $uri
+     * @param string $uri
+     *
      * @return string
      */
-    protected function rewriteAbsolute($uri)
+    protected function rewriteAbsolute(string $uri): string
     {
         $request = $this->getRequest();
 
@@ -252,7 +265,7 @@ class UriRewriteFilter implements FilterInterface
             }
         }
 
-        $base = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null;
+        $base = $_SERVER['REQUEST_URI'] ?? null;
 
         if ($request->getHost()) {
             $base = $request->getSchemeAndHttpHost().$request->getBaseUrl();
@@ -274,10 +287,11 @@ class UriRewriteFilter implements FilterInterface
     /**
      * Removes dots from a URI.
      *
-     * @param  string  $uri
+     * @param string $uri
+     *
      * @return string
      */
-    protected function removeDots($uri)
+    protected function removeDots(string $uri): string
     {
         $uri = str_replace('/./', '/', $uri);
 

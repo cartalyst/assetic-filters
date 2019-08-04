@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Part of the Assetic Filters package.
  *
  * NOTICE OF LICENSE
@@ -27,19 +27,20 @@ use Assetic\Filter\LessphpFilter as AsseticLessphpFilter;
 class LessphpFilter extends AsseticLessphpFilter
 {
     /**
-     * Symfony request instance.
+     * The Symfony Request instance.
      *
-     * @var string
+     * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
 
     /**
      * Filters an asset after it has been loaded.
      *
-     * @param  \Assetic\Asset\AssetInterface  $asset
+     * @param \Assetic\Asset\AssetInterface $asset
+     *
      * @return void
      */
-    public function filterLoad(AssetInterface $asset)
+    public function filterLoad(AssetInterface $asset): void
     {
         $max_nesting_level = ini_get('xdebug.max_nesting_level');
 
@@ -56,11 +57,11 @@ class LessphpFilter extends AsseticLessphpFilter
         $root = $asset->getSourceRoot();
         $path = $asset->getSourcePath();
 
-        $dirs = array();
+        $dirs = [];
 
-        $lc = new \Less_Parser(array(
+        $lc = new \Less_Parser([
             'compress' => true,
-        ));
+        ]);
 
         if ($root && $path) {
             $dirs[] = dirname($root.'/'.$path);
@@ -82,7 +83,7 @@ class LessphpFilter extends AsseticLessphpFilter
         }
 
         if (isset($url['path'])) {
-            $absolutePath = $url['path'] . $absolutePath;
+            $absolutePath = $url['path'].$absolutePath;
         }
 
         $lc->parseFile($root.'/'.$path, $absolutePath);
@@ -91,22 +92,27 @@ class LessphpFilter extends AsseticLessphpFilter
     }
 
     /**
-     * Returns or creates a new symfony request.
+     * Returns or creates a new Symfony Request instance.
      *
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    public function getRequest()
+    public function getRequest(): Request
     {
-        return $this->request ?: $this->request = Request::createFromGlobals();
+        if (! $this->request) {
+            $this->request = Request::createFromGlobals();
+        }
+
+        return $this->request;
     }
 
     /**
      * Sets the request instance.
      *
-     * @param  \Symfony\Component\HttpFoundation\Request
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
      * @return void
      */
-    public function setRequest($request)
+    public function setRequest(Request $request): void
     {
         $this->request = $request;
     }
