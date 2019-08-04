@@ -1,23 +1,12 @@
-# Assetic Filters Change Log
+# Changelog
 
-This project follows [Semantic Versioning](CONTRIBUTING.md).
-
-## Proposals
-
-We do not give estimated times for completion on `Accepted` Proposals.
-
-- [Accepted](https://github.com/cartalyst/assetic-filters/labels/Accepted)
-- [Rejected](https://github.com/cartalyst/assetic-filters/labels/Rejected)
-
----
-
-#### v2.0.1 - 2017-02-24
+### v2.0.1 - 2017-02-24
 
 `UPDATED`
 
 - Use dev version of `richthegeek/phpsass`
 
-#### v2.0.0 - 2017-02-06
+### v2.0.0 - 2017-02-06
 
 `UPDATED`
 
@@ -27,62 +16,62 @@ We do not give estimated times for completion on `Accepted` Proposals.
 
 - Coffee Script Filter.
 
-#### v1.2.8 - 2016-12-06
+### v1.2.8 - 2016-12-06
 
 `UPDATED`
 
 - Loosened symfony/http-foundation version.
 
-#### v1.2.7 - 2015-11-12
+### v1.2.7 - 2015-11-12
 
 `UPDATED`
 
 - Bumped Assetic version.
 
-#### v1.2.6 - 2015-03-18
+### v1.2.6 - 2015-03-18
 
 `UPDATED`
 
 - Coding Standards to PSR-2.
 - Updated autoloading to PSR-4.
 
-#### v1.2.5 - 2015-02-22
+### v1.2.5 - 2015-02-22
 
 `FIXED`
 
 - Check for REQUEST_URI before assigning it, prevents exceptions from being thrown if executed through cli.
 
-#### v1.2.4 - 2015-02-21
+### v1.2.4 - 2015-02-21
 
 `UPDATED`
 
 - Use latest PHPSass version.
 
-#### v1.2.3 - 2015-01-21
+### v1.2.3 - 2015-01-21
 
 `FIXED`
 
 - Use absolute URL's for assets.
 
-#### v1.2.2 - 2014-09-27
+### v1.2.2 - 2014-09-27
 
 `REVISED`
 
 - Use the Symfony Request class instead of depending on an external method on the less compiler.
 
-#### v1.2.1 - 2014-09-42
+### v1.2.1 - 2014-09-42
 
 `FIXED`
 
 - Fixed a bug compiling relative urls when using subdirectories and symlinks.
 
-#### v1.2.0 - 2014-02-04
+### v1.2.0 - 2014-02-04
 
 `ADDED`
 
 - Added a LessphpFilter.
 
-#### v1.1.0 - 2013-11-27
+### v1.1.0 - 2013-11-27
 
 `ADDED`
 
@@ -92,20 +81,20 @@ We do not give estimated times for completion on `Accepted` Proposals.
 
 - Loosened requirements.
 
-#### v1.0.2 - 2015-03-18
+### v1.0.2 - 2015-03-18
 
 `UPDATED`
 
 - Coding Standards to PSR-2.
 - Updated autoloading to PSR-4.
 
-#### v1.0.1 - 2013-10-12
+### v1.0.1 - 2013-10-12
 
 `UPDATED`
 
 - Misc updates.
 
-#### v1.0.0 - 2013-04-26
+### v1.0.0 - 2013-04-26
 
 `INIT`
 
