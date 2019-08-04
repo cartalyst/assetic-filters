@@ -17,22 +17,16 @@
             "homepage": "https://cartalyst.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.cartalyst.com"
-        }
-    ],
     "require": {
         "php": "^7.2",
-        "symfony/http-foundation": "^4.0",
         "cartalyst/assetic": "^1.2",
-        "richthegeek/phpsass": "dev-master"
+        "richthegeek/phpsass": "dev-master",
+        "symfony/http-foundation": "^4.0"
     },
     "require-dev": {
         "cartalyst/php-cs-fixer-config": "^1.0",
         "mockery/mockery": "^1.0",
-        "orchestra/testbench": "^3.0",
+        "orchestra/testbench": "^4.0",
         "phpunit/phpunit": "^8.0"
     },
     "autoload": {
