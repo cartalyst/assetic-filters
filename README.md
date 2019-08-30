@@ -13,6 +13,7 @@ An open source package by [Cartalyst](https://cartalyst.com), code well, rock on
 
 Version | PHP Version
 ------- | ------------
+3.x     | >= 7.2
 2.x     | >= 5.6.4
 1.x     | >= 5.3.0
 
