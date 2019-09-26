@@ -1,5 +1,11 @@
 # Changelog
 
+### v3.0.2 - 2019-09-26
+
+`UPDATED`
+
+- Use phpsass fork.
+
 ### v3.0.1 - 2019-09-08
 
 `FIXED`
