@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.2",
         "cartalyst/assetic": "^1.2",
-        "richthegeek/phpsass": "dev-master",
+        "cartalyst/phpsass": "^2.0",
         "symfony/http-foundation": "^4.0"
     },
     "require-dev": {
