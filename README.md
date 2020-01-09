@@ -13,6 +13,7 @@ An open source package by [Cartalyst](https://cartalyst.com), code well, rock on
 
 Version | PHP Version
 ------- | ------------
+4.x     | >= 7.2.5
 3.x     | >= 7.2
 2.x     | >= 5.6.4
 1.x     | >= 5.3.0
@@ -43,7 +44,7 @@ This software is released under the [BSD 3-Clause](LICENSE) License.
 [link-license]:   https://opensource.org/licenses/MIT
 [link-packagist]: https://packagist.org/packages/cartalyst/assetic-filters
 
-[icon-travis]:    https://travis-ci.org/cartalyst/assetic-filters.svg?branch=3.0
+[icon-travis]:    https://travis-ci.org/cartalyst/assetic-filters.svg?branch=4.x
 [icon-license]:   https://poser.pugx.org/cartalyst/assetic-filters/license
 [icon-version]:   https://poser.pugx.org/cartalyst/assetic-filters/version
 [icon-downloads]: https://poser.pugx.org/cartalyst/assetic-filters/downloads
