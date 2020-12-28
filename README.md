@@ -40,11 +40,11 @@ If you discover any security related issues, please email help@cartalyst.com ins
 This software is released under the [BSD 3-Clause](LICENSE) License.
 
 [link-docs]:      https://cartalyst.com/manual/assetic-filters
-[link-travis]:    https://travis-ci.org/cartalyst/assetic-filters
+[link-travis]:    https://travis-ci.com/cartalyst/assetic-filters
 [link-license]:   https://opensource.org/licenses/MIT
 [link-packagist]: https://packagist.org/packages/cartalyst/assetic-filters
 
-[icon-travis]:    https://travis-ci.org/cartalyst/assetic-filters.svg?branch=4.x
+[icon-travis]:    https://travis-ci.com/cartalyst/assetic-filters.svg?branch=4.x
 [icon-license]:   https://poser.pugx.org/cartalyst/assetic-filters/license
 [icon-version]:   https://poser.pugx.org/cartalyst/assetic-filters/version
 [icon-downloads]: https://poser.pugx.org/cartalyst/assetic-filters/downloads
