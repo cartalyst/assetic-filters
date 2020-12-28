@@ -18,9 +18,9 @@
         }
     ],
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.2.5 || ^8.0",
         "cartalyst/assetic": "^1.2",
-        "cartalyst/phpsass": "^2.0",
+        "cartalyst/phpsass": "^2.1",
         "symfony/http-foundation": "^5.0"
     },
     "require-dev": {
