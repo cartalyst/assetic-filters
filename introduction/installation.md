@@ -6,7 +6,7 @@ The best and easiest way to install the assetic filters package is with [Compose
 
 Open your `composer.json` file and add the following to the `require` array:
 
-	"cartalyst/assetic-filters": "^5.0"
+	"cartalyst/assetic-filters": "^6.0"
 
 ### Install the dependencies
 
